@@ -1,9 +1,19 @@
-<ul>
-<% @cocktails.each do |c| %>
-<li>
-  <%= c.name %>
-  <%= link_to "Show", show_path(c) %>
-</li>
-<% end %>
-</ul>
+<form action='/index' method='post'>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type='text' name='search' id="search-typed-text">
+  <input type='submit' value='Search'>
+</form>
+<div class="content-flex">
+  <% @cocktails.each_with_index do |c, index| %>
+  <% path = 'cocktail'+(index + 1).to_s+'.jpg' %>
+  <div data-aos="fade-up" width="200px" height="150px">
+    <div class="cocktail-card">
+      <div class="card" style="background-image: url(<%= asset_path path %>)">
+        <%= c.name %>
+      </div>
+      <%= link_to "Show", show_path(c) %>
+    </div>
+  </div>
+  <% end %>
+</div>
 <%= link_to "Create cocktail", new_path %>

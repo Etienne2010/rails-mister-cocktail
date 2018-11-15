@@ -1,10 +1,16 @@
 class CocktailsController < ApplicationController
   def index
-    @cocktails = Cocktail.all
+    if params[:search].nil?
+      @cocktails = Cocktail.all
+    else
+      @search = params[:search]
+      @cocktails = Cocktail.where("name LIKE '%#{@search}%'")
+    end
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
+    @ingredients = Ingredient.all
     @dose = Dose.new
   end
 
@@ -15,7 +21,7 @@ class CocktailsController < ApplicationController
   def create
     @cocktail = Cocktail.new(cocktail_params)
     if @cocktail.save
-      redirect_to index_path
+      redirect_to show_path(@cocktail)
     else
       render :new
     end

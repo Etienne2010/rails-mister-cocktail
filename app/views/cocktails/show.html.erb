@@ -1,4 +1,6 @@
+<div>
 <%= @cocktail.name %>
+</div>
 <div>
   <% @cocktail.ingredients.each do |ing| %>
     <%= ing.name %>
@@ -10,13 +12,16 @@
   <% end %>
 </div>
 <%= simple_form_for @dose do |f| %>
-  <% if @cocktail.errors.any? %>
-    <% @cocktail.errors.messages.each do |msg| %>
+  <% if @dose.errors.any? %>
+    <% @dose.errors.messages.each do |msg| %>
       <%= msg %>
     <% end %>
   <% end %>
   <%= f.input :description %>
-  <%= f.association :ingredient %>
+  <%= select_tag "ingredient_id", options_from_collection_for_select(@ingredients,'id','name'),
+      class: 'select2' %>
   <%= f.association :cocktail %>
+  <%= f.hidden_field "h_cocktail", name: "h_cocktail", value: @cocktail.id.to_s %>
   <%= f.submit %>
 <% end %>
+<%= link_to "Back to index", index_path %>

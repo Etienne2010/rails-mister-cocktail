@@ -9,3 +9,7 @@
 
 // console.log('Hello World from Webpacker')
 import 'bootstrap';
+import '../components/select2';
+import '../components/popupsaos'
+import { loadDynamicSearchText } from '../components/search.js';
+loadDynamicSearchText();
