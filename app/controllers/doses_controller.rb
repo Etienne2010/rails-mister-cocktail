@@ -23,7 +23,7 @@ class DosesController < ApplicationController
     if @dose.save && params[:dose][:description] != ""
       p "saved"
       @cocktail = @dose.cocktail
-      redirect_to doses_show_path(@dose)
+      redirect_to cocktail_path(@cocktail)
     else
       id = params["h_cocktail"].to_i
       id = params[:dose][:cocktail_id] if id == 0
