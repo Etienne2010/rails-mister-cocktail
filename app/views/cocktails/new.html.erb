@@ -1,0 +1,9 @@
+<%= simple_form_for(@cocktail) do |f| %>
+  <% if @cocktail.errors.any? %>
+    <% @cocktails.errors.messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+  <%= f.input :name %>
+  <%= f.submit %>
+<% end %>

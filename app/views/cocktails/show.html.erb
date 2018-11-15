@@ -1,0 +1,22 @@
+<%= @cocktail.name %>
+<div>
+  <% @cocktail.ingredients.each do |ing| %>
+    <%= ing.name %>
+    <div>
+      <% ing.doses.each do |d| %>
+        <%= d.description %> <%= link_to "Delete", deldoses_path(d), method: :delete %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<%= simple_form_for @dose do |f| %>
+  <% if @cocktail.errors.any? %>
+    <% @cocktail.errors.messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+  <%= f.input :description %>
+  <%= f.association :ingredient %>
+  <%= f.association :cocktail %>
+  <%= f.submit %>
+<% end %>
